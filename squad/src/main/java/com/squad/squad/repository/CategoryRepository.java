@@ -11,6 +11,12 @@ public class CategoryRepository {
     public CategoryRepository(EntityManager em){
         this.em = em;
     }
+    public Category save(Category category){
+        em.getTransaction().begin();
+        em.persist(category);
+        em.getTransaction().commit();
+        return category;
+    }
 
     public List<Category> getAllCategories() {
         return em.createQuery("SELECT c FROM Category c", Category.class).getResultList();
